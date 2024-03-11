@@ -15,7 +15,7 @@
 #include "WordPair.h"
 #include <iostream>
 
-using std::cout;
+using std::cout; 
 using std::endl;
 using std::nothrow;
 
@@ -53,7 +53,10 @@ void BST::clear(BSTNode* current) {
 /* Constructors and destructor */
 
 // Default constructor
-BST::BST() {}            
+BST::BST() {
+   elementCount = 0;
+   root = nullptr;
+}            
 
 // Copy constructor
 BST::BST(const BST & aBST) {
