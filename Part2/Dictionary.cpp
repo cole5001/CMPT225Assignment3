@@ -16,7 +16,7 @@ using std::endl;
 
  // Constructor and destructor:
    Dictionary::Dictionary(){                           // Default constructor
-        BST();
+        keyValuePairs = new BST();
    }
 
    Dictionary::Dictionary::~Dictionary(){                            // Destructor 
@@ -27,7 +27,7 @@ using std::endl;
    // Description: Returns the number of elements currently stored in the Dictionary.
    // Postcondition: This method does not change the Dictionary.
     unsigned int Dictionary::getElementCount() const{
-        return keyValuePairs->getElementCount();
+        return keyValuePairs->BST::getElementCount();
     }
     
    // Description: Puts "newElement" (association of key-value) into the Dictionary.

@@ -61,11 +61,11 @@ int main(int argc, char *argv[]) {
           aLine.erase(0, pos + delimiter.length());
           translationW = aLine;
           WordPair aWordPair(englishW, translationW);
-          cout << aWordPair << endl;
 
           testing->put(aWordPair);
 		  // insert aWordPair into "testing" using a try/catch block
         }
+        
         myfile.close();
       }
        else 
