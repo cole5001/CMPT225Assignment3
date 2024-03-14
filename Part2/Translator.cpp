@@ -30,7 +30,7 @@ using std::cout;
 using std::ifstream;
 using std::nothrow;
 
-void display(WordPair* anElement){
+void display(WordPair anElement){
     cout << anElement;
 }
 
@@ -54,18 +54,48 @@ int main(int argc, char *argv[]) {
 
       ifstream myfile(filename);
       if (myfile.is_open()) {
-        cout << "Reading from a file:" << endl;  // For debugging purposes
+         const char* cmd = argv[2];
+         const char* dsp = "display ";
+        if (strcmp(cmd, dsp)){
+        
+          while ( getline (myfile,aLine) ) {
+          pos = aLine.find(delimiter);    
+          englishW = aLine.substr(0, pos);
+          aLine.erase(0, pos + delimiter.length());
+          translationW = aLine;
+          WordPair aWordPair(englishW, translationW);
+          display(aWordPair);
+        }
+      }else{
         while ( getline (myfile,aLine) ) {
           pos = aLine.find(delimiter);    
           englishW = aLine.substr(0, pos);
           aLine.erase(0, pos + delimiter.length());
           translationW = aLine;
           WordPair aWordPair(englishW, translationW);
-
           testing->put(aWordPair);
 		  // insert aWordPair into "testing" using a try/catch block
-        }
+        }          
         
+        int i=0;
+        while(i!=1){
+          WordPair result = WordPair();
+          bool exchandle = false;
+          try{
+          string target;
+          cin >> target;
+          WordPair m = WordPair(target);
+          result = testing->get(m);
+          }
+          catch(const ElementDoesNotExistException& exc){
+            cout << "***Not Found!***\n";
+            exchandle = true;
+          }
+          if (exchandle==false){
+            display(result);
+          }
+        }
+      }
         myfile.close();
       }
        else 
