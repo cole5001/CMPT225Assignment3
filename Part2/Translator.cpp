@@ -31,14 +31,13 @@ using std::ifstream;
 using std::nothrow;
 
 void display(WordPair anElement){
-    cout << anElement;
+  cout << anElement;
 }
 
 int main(int argc, char *argv[]) {
-    Dictionary* testing = new Dictionary();
+  Dictionary* testing = new Dictionary();
 
-    if (testing != nullptr) {
-      
+  if (testing != nullptr) {
     string aLine = "";
     string aWord = "";
     string englishW = "";
@@ -47,58 +46,57 @@ int main(int argc, char *argv[]) {
     string delimiter = ":";
     size_t pos = 0;
     WordPair translated;
-	 
+
     // Expecting at least a filename on the command line.
-    if ( ( argc > 1 ) ) {
+    if (argc > 1) {
       filename = argv[1];
 
-      ifstream myfile(filename);
-      if (myfile.is_open()) {
-         const char* cmd = argv[2];
-         const char* dsp = "display ";
-        if (argc > 2 && strcmp(cmd, dsp)){
-        
-          while ( getline (myfile,aLine) ) {
-          pos = aLine.find(delimiter);    
-          englishW = aLine.substr(0, pos);
-          aLine.erase(0, pos + delimiter.length());
-          translationW = aLine;
-          WordPair aWordPair(englishW, translationW);
-          display(aWordPair);
+      ifstream myFile(filename);
+      if (myFile.is_open()) {
+        const char* cmd = argv[2];
+        const char* dsp = "display ";
+        if (argc > 2 && strcmp(cmd, dsp))
+          while (getline(myFile,aLine)) {
+            pos = aLine.find(delimiter);    
+            englishW = aLine.substr(0, pos);
+            aLine.erase(0, pos + delimiter.length());
+            translationW = aLine;
+            WordPair aWordPair(englishW, translationW);
+            display(aWordPair);
+          }
+        else {
+          while (getline(myFile,aLine)) {
+            pos = aLine.find(delimiter);    
+            englishW = aLine.substr(0, pos);
+            aLine.erase(0, pos + delimiter.length());
+            translationW = aLine;
+            WordPair aWordPair(englishW, translationW);
+            // insert aWordPair into "testing" using a try/catch block
+            testing->put(aWordPair);
+          }          
+          
+          int i = 0;
+          while (i != 1) {
+            WordPair result = WordPair();
+            bool exceptionFlag = false;
+            try {
+              string target;
+              cin >> target;
+              WordPair m = WordPair(target);
+              result = testing->get(m);
+            }
+            catch (const ElementDoesNotExistException& exc) {
+              cout << "***Not Found!***\n";
+              exceptionFlag = true;
+            }
+            if (exceptionFlag==false){
+              display(result);
+            }
+          }
         }
-      }else{
-        while ( getline (myfile,aLine) ) {
-          pos = aLine.find(delimiter);    
-          englishW = aLine.substr(0, pos);
-          aLine.erase(0, pos + delimiter.length());
-          translationW = aLine;
-          WordPair aWordPair(englishW, translationW);
-          testing->put(aWordPair);
-		  // insert aWordPair into "testing" using a try/catch block
-        }          
-        
-        int i=0;
-        while(i!=1){
-          WordPair result = WordPair();
-          bool exchandle = false;
-          try{
-          string target;
-          cin >> target;
-          WordPair m = WordPair(target);
-          result = testing->get(m);
-          }
-          catch(const ElementDoesNotExistException& exc){
-            cout << "***Not Found!***\n";
-            exchandle = true;
-          }
-          if (exchandle==false){
-            display(result);
-          }
-        }
+        myFile.close();
       }
-        myfile.close();
-      }
-       else 
+      else 
         cout << "Unable to open file" << endl;
     }
     else
@@ -106,6 +104,6 @@ int main(int argc, char *argv[]) {
   }
   else  
     cout << "new failed!" << endl;	
-
+  
   return 0;
 }

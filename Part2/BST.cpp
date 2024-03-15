@@ -54,7 +54,7 @@ void BST::clear(BSTNode* current) {
 
 // Default constructor
 BST::BST() {
-   elementCount=0;
+   elementCount = 0;
    root = nullptr;
 }            
 
