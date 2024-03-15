@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
       if (myfile.is_open()) {
          const char* cmd = argv[2];
          const char* dsp = "display ";
-        if (strcmp(cmd, dsp)){
+        if (argc > 2 && strcmp(cmd, dsp)){
         
           while ( getline (myfile,aLine) ) {
           pos = aLine.find(delimiter);    
