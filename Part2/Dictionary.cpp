@@ -1,7 +1,7 @@
 /*
 * Dictionary.cpp
  * 
- * Description: Dictonary data collection ADT class.
+ * Description: Dictionary data collection ADT class.
  *              BST-based implementation.
  *              Duplicated elements not allowed.
  *              
@@ -15,7 +15,7 @@ using std::cout;
 using std::endl;
 
     // Constructor:
-    Dictionary::Dictionary(){                           // Default constructor
+    Dictionary::Dictionary() {                           // Default constructor
         keyValuePairs = new BST();
         if (keyValuePairs == nullptr){
             cout << "Failed to allocate memory" << endl;
@@ -24,14 +24,14 @@ using std::endl;
     }
 
     // Destructor:
-    Dictionary::Dictionary::~Dictionary(){                            // Destructor 
+    Dictionary::Dictionary::~Dictionary() {                            // Destructor 
         keyValuePairs->~BST();
     }
     // Dictionary operations
 
     // Description: Returns the number of elements currently stored in the Dictionary.
     // Postcondition: This method does not change the Dictionary.
-    unsigned int Dictionary::getElementCount() const{
+    unsigned int Dictionary::getElementCount() const {
         return keyValuePairs->BST::getElementCount();
     }
     
@@ -42,7 +42,7 @@ using std::endl;
     //            when newElement cannot be inserted in the Dictionary.  
     // Exception: Throws the exception "ElementAlreadyExistsException" 
     //            if "newElement" already exists in the Dictionary.  
-    void Dictionary::put(WordPair & newElement){
+    void Dictionary::put(WordPair & newElement) {
         keyValuePairs->insert(newElement);
     }
 
@@ -53,7 +53,7 @@ using std::endl;
     //            if the key is not found in the Dictionary.
     // Exception: Throws the exception EmptyDataCollectionException if the Dictionary is empty.
     // Postcondition: This method does not change the Dictionary.
-    WordPair & Dictionary::get(WordPair & targetElement) const{
+    WordPair & Dictionary::get(WordPair & targetElement) const {
         return keyValuePairs->retrieve(targetElement);
     }
 
@@ -61,8 +61,8 @@ using std::endl;
     // Precondition: Dictionary is not empty.
     // Exception: Throws the exception EmptyDataCollectionException if the Dictionary is empty.
     // Postcondition: This method does not change the Dictionary.
-    void Dictionary::displayContent(void visit(WordPair &)) const{
-        if (keyValuePairs->getElementCount() == 0){
+    void Dictionary::displayContent(void visit(WordPair &)) const {
+        if (keyValuePairs->getElementCount() == 0) {
             throw EmptyDataCollectionException("Binary search tree is empty.");
         }
         keyValuePairs->traverseInOrder(visit);

@@ -5,7 +5,7 @@
  *              BST-based implementation.
  *              Duplicated elements not allowed.
  *              
- * Author: AL
+ * Author: AL (nothing was changed)
  * Date of last modification: Feb. 2024
  */
 

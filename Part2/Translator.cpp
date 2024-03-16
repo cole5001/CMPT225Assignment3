@@ -55,6 +55,8 @@ int main(int argc, char *argv[]) {
       if (myFile.is_open()) {
         const char* cmd = argv[2];
         const char* dsp = "display ";
+        
+        // Case where the "display" command is used: print everything and end
         if (argc > 2 && strcmp(cmd, dsp))
           while (getline(myFile,aLine)) {
             pos = aLine.find(delimiter);    
@@ -64,6 +66,7 @@ int main(int argc, char *argv[]) {
             WordPair aWordPair(englishW, translationW);
             display(aWordPair);
           }
+        // Generate the BST from the data file
         else {
           while (getline(myFile,aLine)) {
             pos = aLine.find(delimiter);    
@@ -71,7 +74,6 @@ int main(int argc, char *argv[]) {
             aLine.erase(0, pos + delimiter.length());
             translationW = aLine;
             WordPair aWordPair(englishW, translationW);
-            // insert aWordPair into "testing" using a try/catch block
             testing->put(aWordPair);
           }          
           
@@ -79,6 +81,8 @@ int main(int argc, char *argv[]) {
           while (i != 1) {
             WordPair result = WordPair();
             bool exceptionFlag = false;
+            
+            // using a try/catch block to catch exception
             try {
               string target;
               cin >> target;
@@ -89,6 +93,8 @@ int main(int argc, char *argv[]) {
               cout << "***Not Found!***\n";
               exceptionFlag = true;
             }
+            
+            // Display the WordPair if found 
             if (exceptionFlag==false){
               display(result);
             }
