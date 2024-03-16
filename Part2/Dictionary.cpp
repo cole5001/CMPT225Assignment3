@@ -14,11 +14,16 @@
 using std::cout;
 using std::endl;
 
-    // Constructor and destructor:
+    // Constructor:
     Dictionary::Dictionary(){                           // Default constructor
         keyValuePairs = new BST();
+        if (keyValuePairs == nullptr){
+            cout << "Failed to allocate memory" << endl;
+            exit(0);
+        }
     }
 
+    // Destructor:
     Dictionary::Dictionary::~Dictionary(){                            // Destructor 
         keyValuePairs->~BST();
     }

@@ -82,8 +82,8 @@ int main(int argc, char *argv[]) {
             try {
               string target;
               cin >> target;
-              WordPair m = WordPair(target);
-              result = testing->get(m);
+              WordPair targetPair = WordPair(target);
+              result = testing->get(targetPair);
             }
             catch (const ElementDoesNotExistException& exc) {
               cout << "***Not Found!***\n";
